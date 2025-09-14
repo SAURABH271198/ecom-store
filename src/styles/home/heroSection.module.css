@@ -1,0 +1,13 @@
+.animate-slideShow {
+    width: 500%;
+    animation: slideShow 12s infinite;
+  }
+  @keyframes slideShow {
+    0% { transform: translateX(0%); }
+    33% { transform: translateX(0%); }
+    36% { transform: translateX(-100%); }
+    66% { transform: translateX(-100%); }
+    69% { transform: translateX(-200%); }
+    99% { transform: translateX(-200%); }
+    100% { transform: translateX(0%); }
+  }
