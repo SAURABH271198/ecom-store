@@ -1,90 +1,25 @@
 "use client";
 
-import React from "react";
-import {
-  Card,
-  CardMedia,
-  CardContent,
-  Typography,
-  CardActions,
-  Button,
-  Box,
-  Rating,
-} from "@mui/material";
+import Image from "next/image";
+import Link from "next/link";
 
-export default function ProductCard({ product }) {
+export default function ProductCard({ id, title, price, image, href }) {
   return (
-    <Card
-      sx={{
-        width: 300,
-        borderRadius: 3,
-        boxShadow: 3,
-        transition: "transform 0.3s, box-shadow 0.3s",
-        "&:hover": {
-          transform: "scale(1.05)",
-          boxShadow: 6,
-        },
-      }}
-    >
-      {/* Product Image */}
-      <CardMedia
-        component="img"
-        height="200"
-        image={product.image || "https://via.placeholder.com/300x200"}
-        alt={product.title}
-        sx={{ objectFit: "cover" }}
-      />
-
-      {/* Product Info */}
-      <CardContent>
-        <Typography
-          variant="h6"
-          component="div"
-          gutterBottom
-          noWrap
-          title={product.title}
-        >
-          {product.title}
-        </Typography>
-        <Typography variant="body2" color="text.secondary">
-          {product.category}
-        </Typography>
-
-        {/* Rating */}
-        <Box sx={{ display: "flex", alignItems: "center", mt: 1 }}>
-          <Rating
-            name="product-rating"
-            value={product.rating?.rate || 0}
-            precision={0.5}
-            readOnly
-            size="small"
-          />
-          <Typography variant="body2" sx={{ ml: 0.5 }}>
-            ({product.rating?.count || 0})
-          </Typography>
-        </Box>
-
-        {/* Price */}
-        <Typography
-          variant="h6"
-          color="success.main"
-          sx={{ mt: 1, fontWeight: "bold" }}
-        >
-          ₹{product.price}
-        </Typography>
-      </CardContent>
-
-      {/* Add to Cart Button */}
-      <CardActions>
-        <Button
-          fullWidth
-          variant="contained"
-          color="secondary"
-          sx={{ fontWeight: "bold" }}
-        >
-          Add to Cart
-        </Button>
-      </CardActions>
-    </Card>
+    <Link href={href || `/products/${id}`} className="block bg-white rounded-lg shadow hover:shadow-lg transition-shadow duration-300 overflow-hidden">
+      <div className="relative w-full h-48 sm:h-56 md:h-64">
+        <Image
+          src={image}
+          alt={title}
+          fill
+          sizes="(max-width: 768px) 100vw, 33vw"
+          className="object-cover"
+          priority={false}
+        />
+      </div>
+      <div className="p-4">
+        <h3 className="text-gray-900 font-semibold text-lg truncate">{title}</h3>
+        <p className="mt-1 text-red-600 font-bold text-xl">${price.toFixed(2)}</p>
+      </div>
+    </Link>
   );
 }

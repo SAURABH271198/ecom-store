@@ -1,34 +1,25 @@
-"use client";
+import ProductCard from "../../components/products/productCard";
 
-import React from "react";
-import ProductCard from "../../components/products/ProductCard";
-import { Grid, Typography, Box } from "@mui/material";
+const getFeaturedProducts = async () => {
+    try {
+        const resp = await fetch('https://fakestoreapi.com/products?limit=6');
+        return await resp.json()
+    }
+    catch(error) {
+        console.log(error);
+    }
+}
 
-export default async function FeaturedProductsPage() {
-  const resp = await fetch("https://fakestoreapi.com/products?limit=6", {
-    cache: "no-store", // ensures fresh SSR render
-  });
-  const products = await resp.json();
-
+export default async function FeaturedProducts() {
+    const featuredProducts = await getFeaturedProducts();
   return (
-    <Box sx={{ width: "100%", px: { xs: 2, md: 6 }, py: 6 }}>
-      <Typography
-        variant="h4"
-        component="h1"
-        gutterBottom
-        align="center"
-        sx={{ fontWeight: "bold", mb: 4 }}
-      >
-        Featured Products
-      </Typography>
-
-      <Grid container spacing={4}>
-        {products.map((product) => (
-          <Grid item key={product.id} xs={12} sm={6} md={4}>
-            <ProductCard product={product} />
-          </Grid>
+    <section className="max-w-7xl mx-auto px-4 py-16">
+      <h2 className="text-3xl font-bold mb-8 text-gray-900">Featured Products</h2>
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+        {featuredProducts.map((product) => (
+          <ProductCard key={product.id} {...product} />
         ))}
-      </Grid>
-    </Box>
+      </div>
+    </section>
   );
 }

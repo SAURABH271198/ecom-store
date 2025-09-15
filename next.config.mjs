@@ -3,7 +3,6 @@ const nextConfig = {
     images: {
         domains: ["picsum.photos", "fakestoreapi.com"],
     }
-
 };
 
 export default nextConfig;
