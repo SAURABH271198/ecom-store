@@ -1,4 +1,4 @@
-import ProductCard from "../../components/products/ProductCard";
+import ProductCard from "../../components/products/productCard";
 
 const getProducts = async () => {
 	try {
