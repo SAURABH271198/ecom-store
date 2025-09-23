@@ -1,9 +1,7 @@
-"use client";
-
 import Image from "next/image";
 import Link from "next/link";
 
-export default function ProductCard({ id, title, price, image, href }) {
+export default async function ProductCard({ id, title, price, image, href }) {
   return (
     <Link href={href || `/products/${id}`} className="block bg-white rounded-lg shadow hover:shadow-lg transition-shadow duration-300 overflow-hidden">
       <div className="relative w-full h-48 sm:h-56 md:h-64">
